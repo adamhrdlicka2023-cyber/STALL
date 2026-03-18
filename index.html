@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STALL – Nakupujte bez starostí</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #3a6b35;
+    --green-light: #7daa6f;
+    --green-pale: #c8ddb8;
+    --cream: #f5f0e8;
+    --beige: #e8dece;
+    --dark: #1a1a14;
+    --text: #2c2c24;
+    --accent: #c84b2f;
+    --white: #fdfaf5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── TOPBAR ─── */
+  .topbar {
+    background: var(--green);
+    color: var(--cream);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    padding: 8px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar a { color: var(--cream); text-decoration: none; opacity: 0.85; transition: opacity .2s; }
+  .topbar a:hover { opacity: 1; }
+  .topbar-links { display: flex; gap: 28px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--beige);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    backdrop-filter: blur(10px);
+    transition: box-shadow .3s;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--green);
+    transition: width .3s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-icons { display: flex; gap: 20px; align-items: center; }
+  .nav-icons svg { width: 20px; height: 20px; stroke: var(--text); fill: none; cursor: pointer; transition: stroke .2s; }
+  .nav-icons svg:hover { stroke: var(--green); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 92vh;
+    background: linear-gradient(135deg, var(--green) 0%, #2a4f26 60%, #1a3318 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(125,170,111,0.18) 0%, transparent 60%);
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--green-pale);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--green-pale);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 5vw, 76px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green-pale);
+  }
+  .hero p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.75);
+    max-width: 400px;
+    margin-bottom: 48px;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--cream);
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    transition: all .3s ease;
+    width: fit-content;
+  }
+  .btn-primary:hover { background: var(--white); gap: 18px; }
+  .btn-primary svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-image-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #4a7a44 0%, #2d5429 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .hero-img-placeholder {
+    width: 70%;
+    aspect-ratio: 2/3;
+    background: linear-gradient(180deg, rgba(200,221,184,0.3) 0%, rgba(58,107,53,0.5) 100%);
+    border: 1px solid rgba(200,221,184,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-img-placeholder::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(200,221,184,0.4) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .hero-img-icon { font-size: 80px; opacity: 0.4; }
+  .hero-stats {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    display: flex;
+    gap: 40px;
+    z-index: 2;
+  }
+  .stat { color: var(--white); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-bar {
+    background: var(--accent);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee 22s linear infinite;
+  }
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 40px;
+    color: var(--white);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .marquee-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.5); border-radius: 50%; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── SECTION ─── */
+  .section { padding: 100px 80px; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--green);
+  }
+
+  /* ─── WHY US ─── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .why-image-col {
+    background: linear-gradient(160deg, #c8ddb8 0%, #a0c490 100%);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .why-image-col::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(58,107,53,0.05) 40px, rgba(58,107,53,0.05) 80px
+    );
+  }
+  .why-image-col-icon { font-size: 100px; opacity: 0.3; position: relative; z-index: 1; }
+  .why-text-col {
+    padding: 80px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .why-text-col h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: var(--dark);
+  }
+  .why-text-col p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #5a5a4a;
+    margin-bottom: 40px;
+    max-width: 440px;
+  }
+  .why-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--white);
+    border: 1px solid var(--green-pale);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 16px;
+    letter-spacing: 0.04em;
+  }
+  .badge-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+
+  /* ─── UPSELL ─── */
+  .upsell {
+    background: var(--dark);
+    color: var(--white);
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .upsell::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(58,107,53,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .upsell-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 70px;
+  }
+  .upsell-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.05;
+  }
+  .upsell-header h2 em { font-style: italic; color: var(--green-pale); }
+  .upsell-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .upsell-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 48px;
+    transition: background .3s;
+  }
+  .upsell-card:hover { background: rgba(255,255,255,0.08); }
+  .upsell-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 900;
+    color: rgba(200,221,184,0.15);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .upsell-card h3 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+    color: var(--cream);
+  }
+  .upsell-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .upsell-card ul li {
+    font-size: 14px;
+    color: rgba(245,240,232,0.65);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .upsell-card ul li::before {
+    content: '';
+    display: block;
+    width: 16px; height: 1px;
+    background: var(--green-light);
+    flex-shrink: 0;
+  }
+
+  /* ─── TEAM ─── */
+  .team { background: var(--cream); }
+  .team h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: var(--dark);
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .team-card {
+    background: var(--white);
+    overflow: hidden;
+    transition: transform .3s ease;
+  }
+  .team-card:hover { transform: translateY(-6px); }
+  .team-card-img {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .team-card:nth-child(1) .team-card-img { background: linear-gradient(160deg, #c8ddb8 0%, #a0c490 100%); }
+  .team-card:nth-child(2) .team-card-img { background: linear-gradient(160deg, #d4c9b8 0%, #b5a898 100%); }
+  .team-card:nth-child(3) .team-card-img { background: linear-gradient(160deg, #b8c8dd 0%, #90a8c4 100%); }
+  .team-card-body { padding: 28px 32px 32px; }
+  .team-card-role {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .team-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--dark);
+  }
+  .team-card-text { font-size: 14px; line-height: 1.7; color: #6a6a5a; }
+
+  /* ─── CATEGORIES ─── */
+  .categories { background: var(--white); }
+  .categories h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: var(--dark);
+  }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .cat-card {
+    border: 1px solid var(--beige);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .3s ease;
+  }
+  .cat-card:hover { border-color: var(--green); }
+  .cat-card:hover .cat-overlay { opacity: 1; }
+  .cat-card:hover .cat-img { transform: scale(1.03); }
+  .cat-img {
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .4s ease;
+  }
+  .cat-card:nth-child(1) .cat-img { background: linear-gradient(160deg, #e8e0d4 0%, #d4c8b8 100%); }
+  .cat-card:nth-child(2) .cat-img { background: linear-gradient(160deg, #d8e8d0 0%, #b8d4b0 100%); }
+  .cat-card:nth-child(3) .cat-img { background: linear-gradient(160deg, #e0d8e8 0%, #c8b8d4 100%); }
+  .cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(58,107,53,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .cat-overlay-text {
+    color: var(--white);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .cat-body { padding: 28px 28px 32px; }
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+  .cat-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .cat-items li {
+    font-size: 13px;
+    color: #7a7a6a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.04em;
+  }
+  .cat-items li::before {
+    content: '';
+    display: block;
+    width: 12px; height: 1px;
+    background: var(--green-pale);
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--dark);
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    transition: all .3s;
+    cursor: pointer;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-outline:hover { background: var(--dark); color: var(--white); gap: 14px; }
+
+  /* ─── NEWSLETTER ─── */
+  .newsletter {
+    background: linear-gradient(135deg, var(--green) 0%, #2a4f26 100%);
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .newsletter h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .newsletter h2 em { font-style: italic; color: var(--green-pale); }
+  .newsletter p { font-size: 16px; line-height: 1.7; color: rgba(245,240,232,0.7); }
+  .newsletter-form { display: flex; flex-direction: column; gap: 20px; }
+  .newsletter-input-row { display: flex; }
+  .newsletter-input {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-right: none;
+    padding: 16px 20px;
+    color: var(--white);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: background .2s;
+  }
+  .newsletter-input::placeholder { color: rgba(255,255,255,0.4); }
+  .newsletter-input:focus { background: rgba(255,255,255,0.15); }
+  .newsletter-btn {
+    background: var(--cream);
+    border: 1px solid var(--cream);
+    color: var(--dark);
+    padding: 16px 28px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background .2s;
+  }
+  .newsletter-btn:hover { background: var(--white); }
+  .newsletter-socials { display: flex; gap: 16px; align-items: center; }
+  .newsletter-socials span {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    margin-right: 4px;
+  }
+  .social-link {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all .2s;
+  }
+  .social-link:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 60px 80px 30px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 50px;
+  }
+  .footer-brand .logo { color: var(--cream); margin-bottom: 16px; display: block; }
+  .footer-brand p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.5);
+    max-width: 280px;
+  }
+  .footer-col h4 {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 20px;
+  }
+  .footer-col a {
+    display: block;
+    color: rgba(245,240,232,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 10px;
+    transition: color .2s;
+  }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom span { font-size: 12px; color: rgba(245,240,232,0.35); }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>Udržitelná móda · Etická výroba · Česká značka</span>
+  <div class="topbar-links">
+    <a href="#">Najít prodejnu</a>
+    <a href="#">Nápověda</a>
+    <a href="#">Přidej se k nám</a>
+    <a href="#" style="font-weight:600;opacity:1;">Přihlásit se</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">STALL<span>®</span></div>
+  <div class="nav-links">
+    <a href="#">Novinky</a>
+    <a href="#">Muži</a>
+    <a href="#">Ženy</a>
+    <a href="#">Děti</a>
+  </div>
+  <div class="nav-icons">
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Udržitelná móda 2025</div>
+    <h1>Nakupujte<br>bez <em>starostí!</em></h1>
+    <p>Patříš do Gen Alpha nebo Gen Z a hledáš oblečení s originálním designem? Jsi na správném místě — začni nakupovat ještě dnes.</p>
+    <a href="#" class="btn-primary">
+      Staň se zákazníkem
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">2k+</span>
+        <span class="stat-label">Zákazníků</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Etická výroba</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Kolekce</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-inner">
+      <div class="hero-img-placeholder">
+        <div class="hero-img-icon">👗</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span class="marquee-item">Nová kolekce <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Udržitelná móda <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Etická výroba <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Gen Z & Alpha <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Česká značka <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Originální design <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Nová kolekce <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Udržitelná móda <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Etická výroba <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Gen Z & Alpha <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Česká značka <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Originální design <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- WHY US -->
+<div class="why-grid reveal">
+  <div class="why-image-col">
+    <div class="why-image-col-icon">✦</div>
+  </div>
+  <div class="why-text-col">
+    <div class="section-label">Proč právě my</div>
+    <h2>Móda,<br>která má smysl.</h2>
+    <p>Ve STALLu se zaměřujeme na udržitelnou módu a etickou výrobu. Věříme, že krásné oblečení nemusí zatěžovat planetu. Pečlivě vybíráme materiály a partnery, abychom vám přinesli kousky, které nejen skvěle vypadají, ale i něco znamenají.</p>
+    <div class="why-badges">
+      <span class="badge"><span class="badge-dot"></span>Originální design</span>
+      <span class="badge"><span class="badge-dot"></span>Udržitelné materiály</span>
+      <span class="badge"><span class="badge-dot"></span>Etická výroba</span>
+      <span class="badge"><span class="badge-dot"></span>Nadčasová elegance</span>
+      <span class="badge"><span class="badge-dot"></span>Gen Z & Alpha</span>
+    </div>
+    <a href="#" class="btn-primary" style="background:var(--green);color:var(--white);">
+      Staň se zákazníkem
+      <svg viewBox="0 0 24 24" stroke-width="2" style="stroke:var(--white)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- UPSELL -->
+<section class="upsell">
+  <div class="upsell-header reveal">
+    <div>
+      <div class="section-label" style="color:var(--green-pale)">Pro prodejce</div>
+      <h2>Enter <em>UpSell+</em></h2>
+    </div>
+  </div>
+  <div class="upsell-cards">
+    <div class="upsell-card reveal reveal-delay-1">
+      <div class="upsell-card-num">01</div>
+      <h3>Místo pro tvůrce</h3>
+      <ul>
+        <li>Jednoduchý setup obchodu</li>
+        <li>Žádný registrační poplatek</li>
+        <li>Neomezený počet produktů</li>
+        <li>Férové podmínky</li>
+      </ul>
+    </div>
+    <div class="upsell-card reveal reveal-delay-2">
+      <div class="upsell-card-num">02</div>
+      <h3>Domov pro udržitelné nálezy</h3>
+      <ul>
+        <li>Pouze unikátní kousky</li>
+        <li>Jednodruhové kreace</li>
+        <li>Upcykled pro planetu</li>
+        <li>Přímý kontakt s tvůrci</li>
+      </ul>
+    </div>
+    <div class="upsell-card reveal reveal-delay-1" style="border-top:none;">
+      <div class="upsell-card-num">03</div>
+      <h3>Výhodné podmínky</h3>
+      <ul>
+        <li>Minimální měsíční poplatek</li>
+        <li>Vysoké procento z tržeb</li>
+        <li>Okamžité upozornění na novinky</li>
+      </ul>
+    </div>
+    <div class="upsell-card reveal reveal-delay-2" style="border-top:none;">
+      <div class="upsell-card-num">04</div>
+      <h3>Komunita tvůrců</h3>
+      <ul>
+        <li>Komunikace s umělci</li>
+        <li>Upozornění na čerstvé kousky</li>
+        <li>Podpora lokálních návrhářů</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section team">
+  <div class="section-label reveal">Náš tým</div>
+  <h2 class="reveal">Lidé za značkou.</h2>
+  <div class="team-grid">
+    <div class="team-card reveal reveal-delay-1">
+      <div class="team-card-img">👩‍💼</div>
+      <div class="team-card-body">
+        <div class="team-card-role">Vedoucí prodejny</div>
+        <div class="team-card-name">Jasmine</div>
+        <p class="team-card-text">Za obchodem STALL stojím já, Jasmine. Se zkušenostmi v módním průmyslu jsem se rozhodla vytvořit místo pro nadčasovou eleganci a street wear. Nabízíme oblečení, které kombinuje kvalitu, moderní design a zodpovědný přístup.</p>
+      </div>
+    </div>
+    <div class="team-card reveal reveal-delay-2">
+      <div class="team-card-img">👨‍🎨</div>
+      <div class="team-card-body">
+        <div class="team-card-role">Hlavní návrhář</div>
+        <div class="team-card-name">Shawn</div>
+        <p class="team-card-text">Absolvent UMPRUM, Shawn spolupracoval s předními českými i zahraničními značkami a účastnil se světových fashion weeků. Minimalistický styl, experimentování s materiály, nadčasová elegance.</p>
+      </div>
+    </div>
+    <div class="team-card reveal reveal-delay-3">
+      <div class="team-card-img">🛍️</div>
+      <div class="team-card-body">
+        <div class="team-card-role">Prodávající</div>
+        <div class="team-card-name">Olivia</div>
+        <p class="team-card-text">Ve STALLu se zaměřujeme na udržitelnou módu a etickou výrobu. Věříme, že krásné oblečení nemusí zatěžovat planetu. Připojte se k nám a podpořte módu, která má smysl.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section categories">
+  <div class="section-label reveal">Kolekce</div>
+  <h2 class="reveal">Vyber si.</h2>
+  <div class="cat-grid">
+    <div class="cat-card reveal reveal-delay-1">
+      <div class="cat-img">
+        👔
+        <div class="cat-overlay">
+          <span class="cat-overlay-text">Nakupovat →</span>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="cat-title">Muži</div>
+        <ul class="cat-items">
+          <li>Boty</li>
+          <li>Oblečení</li>
+          <li>Sport</li>
+        </ul>
+        <button class="btn-outline">
+          Nakupovat
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="cat-card reveal reveal-delay-2">
+      <div class="cat-img">
+        👗
+        <div class="cat-overlay">
+          <span class="cat-overlay-text">Nakupovat →</span>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="cat-title">Ženy</div>
+        <ul class="cat-items">
+          <li>Boty</li>
+          <li>Oblečení</li>
+          <li>Sport</li>
+        </ul>
+        <button class="btn-outline">
+          Nakupovat
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="cat-card reveal reveal-delay-3">
+      <div class="cat-img">
+        🧒
+        <div class="cat-overlay">
+          <span class="cat-overlay-text">Nakupovat →</span>
+        </div>
+      </div>
+      <div class="cat-body">
+        <div class="cat-title">Děti</div>
+        <ul class="cat-items">
+          <li>Boty</li>
+          <li>Oblečení</li>
+          <li>Sport</li>
+        </ul>
+        <button class="btn-outline">
+          Nakupovat
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="reveal">
+    <h2>Připoj se<br>k <em>nám!</em></h2>
+    <p>Chceš se dozvědět o novinkách a dalších jako jeden z prvních? Přihlaš se k zasílání pravidelných newsletterů.</p>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <div class="newsletter-form">
+      <div class="newsletter-input-row">
+        <input class="newsletter-input" type="email" placeholder="Tvůj e-mail">
+        <button class="newsletter-btn">Přihlásit</button>
+      </div>
+      <div class="newsletter-socials">
+        <span>Sociální sítě</span>
+        <a href="#" class="social-link">f</a>
+        <a href="#" class="social-link">ig</a>
+        <a href="#" class="social-link">tw</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">STALL<span style="color:var(--accent)">®</span></span>
+      <p>Udržitelná móda pro novou generaci. Etická výroba, originální design, nadčasová elegance.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Nakupovat</h4>
+      <a href="#">Muži</a>
+      <a href="#">Ženy</a>
+      <a href="#">Děti</a>
+      <a href="#">Novinky</a>
+    </div>
+    <div class="footer-col">
+      <h4>Informace</h4>
+      <a href="#">O nás</a>
+      <a href="#">Udržitelnost</a>
+      <a href="#">Kariéra</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Podpora</h4>
+      <a href="#">Nápověda</a>
+      <a href="#">Doprava</a>
+      <a href="#">Vrácení zboží</a>
+      <a href="#">Kontakt</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 STALL. Všechna práva vyhrazena.</span>
+    <span>Vytvořeno s ♥ v Praze</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) el.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 40 ? '0 2px 30px rgba(0,0,0,0.08)' : 'none';
+  });
+</script>
+</body>
+</html>
