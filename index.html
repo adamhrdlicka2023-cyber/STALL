@@ -181,29 +181,17 @@
     position: relative;
   }
   .hero-img-placeholder {
-    width: 70%;
+    width: 75%;
     aspect-ratio: 2/3;
-    background: linear-gradient(180deg, rgba(200,221,184,0.3) 0%, rgba(58,107,53,0.5) 100%);
-    border: 1px solid rgba(200,221,184,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
     overflow: hidden;
+    position: relative;
   }
-  .hero-img-placeholder::before {
-    content: '';
-    position: absolute;
-    width: 60%;
-    height: 60%;
-    background: radial-gradient(circle, rgba(200,221,184,0.4) 0%, transparent 70%);
-    animation: pulse 3s ease-in-out infinite;
+  .hero-img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.1); opacity: 1; }
-  }
-  .hero-img-icon { font-size: 80px; opacity: 0.4; }
   .hero-stats {
     position: absolute;
     bottom: 40px;
@@ -285,24 +273,18 @@
     overflow: hidden;
   }
   .why-image-col {
-    background: linear-gradient(160deg, #c8ddb8 0%, #a0c490 100%);
     min-height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
     overflow: hidden;
   }
-  .why-image-col::after {
-    content: '';
+  .why-image-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
     position: absolute;
     inset: 0;
-    background: repeating-linear-gradient(
-      45deg, transparent, transparent 40px,
-      rgba(58,107,53,0.05) 40px, rgba(58,107,53,0.05) 80px
-    );
   }
-  .why-image-col-icon { font-size: 100px; opacity: 0.3; position: relative; z-index: 1; }
   .why-text-col {
     padding: 80px 70px;
     display: flex;
@@ -438,16 +420,18 @@
   .team-card:hover { transform: translateY(-6px); }
   .team-card-img {
     height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 64px;
-    position: relative;
     overflow: hidden;
+    position: relative;
   }
-  .team-card:nth-child(1) .team-card-img { background: linear-gradient(160deg, #c8ddb8 0%, #a0c490 100%); }
-  .team-card:nth-child(2) .team-card-img { background: linear-gradient(160deg, #d4c9b8 0%, #b5a898 100%); }
-  .team-card:nth-child(3) .team-card-img { background: linear-gradient(160deg, #b8c8dd 0%, #90a8c4 100%); }
+  .team-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform .4s ease;
+  }
+  .team-card:hover .team-card-img img { transform: scale(1.05); }
   .team-card-body { padding: 28px 32px 32px; }
   .team-card-role {
     font-size: 10px;
@@ -490,17 +474,17 @@
   .cat-card:hover .cat-img { transform: scale(1.03); }
   .cat-img {
     height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 72px;
-    position: relative;
     overflow: hidden;
+    position: relative;
+  }
+  .cat-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
     transition: transform .4s ease;
   }
-  .cat-card:nth-child(1) .cat-img { background: linear-gradient(160deg, #e8e0d4 0%, #d4c8b8 100%); }
-  .cat-card:nth-child(2) .cat-img { background: linear-gradient(160deg, #d8e8d0 0%, #b8d4b0 100%); }
-  .cat-card:nth-child(3) .cat-img { background: linear-gradient(160deg, #e0d8e8 0%, #c8b8d4 100%); }
+  .cat-card:hover .cat-img img { transform: scale(1.04); }
   .cat-overlay {
     position: absolute;
     inset: 0;
@@ -750,7 +734,7 @@
   <div class="hero-image">
     <div class="hero-image-inner">
       <div class="hero-img-placeholder">
-        <div class="hero-img-icon">👗</div>
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Fashion model">
       </div>
     </div>
   </div>
@@ -777,7 +761,7 @@
 <!-- WHY US -->
 <div class="why-grid reveal">
   <div class="why-image-col">
-    <div class="why-image-col-icon">✦</div>
+    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&q=80" alt="Fashion boutique">
   </div>
   <div class="why-text-col">
     <div class="section-label">Proč právě my</div>
@@ -853,7 +837,7 @@
   <h2 class="reveal">Lidé za značkou.</h2>
   <div class="team-grid">
     <div class="team-card reveal reveal-delay-1">
-      <div class="team-card-img">👩‍💼</div>
+      <div class="team-card-img"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=500&q=80" alt="Jasmine"></div>
       <div class="team-card-body">
         <div class="team-card-role">Vedoucí prodejny</div>
         <div class="team-card-name">Jasmine</div>
@@ -861,7 +845,7 @@
       </div>
     </div>
     <div class="team-card reveal reveal-delay-2">
-      <div class="team-card-img">👨‍🎨</div>
+      <div class="team-card-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Shawn"></div>
       <div class="team-card-body">
         <div class="team-card-role">Hlavní návrhář</div>
         <div class="team-card-name">Shawn</div>
@@ -869,7 +853,7 @@
       </div>
     </div>
     <div class="team-card reveal reveal-delay-3">
-      <div class="team-card-img">🛍️</div>
+      <div class="team-card-img"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80" alt="Olivia"></div>
       <div class="team-card-body">
         <div class="team-card-role">Prodávající</div>
         <div class="team-card-name">Olivia</div>
@@ -886,10 +870,8 @@
   <div class="cat-grid">
     <div class="cat-card reveal reveal-delay-1">
       <div class="cat-img">
-        👔
-        <div class="cat-overlay">
-          <span class="cat-overlay-text">Nakupovat →</span>
-        </div>
+        <img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=600&q=80" alt="Muži moda">
+        <div class="cat-overlay"><span class="cat-overlay-text">Nakupovat →</span></div>
       </div>
       <div class="cat-body">
         <div class="cat-title">Muži</div>
@@ -906,10 +888,8 @@
     </div>
     <div class="cat-card reveal reveal-delay-2">
       <div class="cat-img">
-        👗
-        <div class="cat-overlay">
-          <span class="cat-overlay-text">Nakupovat →</span>
-        </div>
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80" alt="Ženy moda">
+        <div class="cat-overlay"><span class="cat-overlay-text">Nakupovat →</span></div>
       </div>
       <div class="cat-body">
         <div class="cat-title">Ženy</div>
@@ -926,10 +906,8 @@
     </div>
     <div class="cat-card reveal reveal-delay-3">
       <div class="cat-img">
-        🧒
-        <div class="cat-overlay">
-          <span class="cat-overlay-text">Nakupovat →</span>
-        </div>
+        <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=600&q=80" alt="Děti moda">
+        <div class="cat-overlay"><span class="cat-overlay-text">Nakupovat →</span></div>
       </div>
       <div class="cat-body">
         <div class="cat-title">Děti</div>
@@ -946,6 +924,39 @@
     </div>
   </div>
 </section>
+
+<!-- LOOKBOOK -->
+<section class="section" style="background:var(--cream); padding-bottom: 0;">
+  <div class="section-label reveal">Inspirace</div>
+  <h2 class="reveal" style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--dark);margin-bottom:48px;">Lookbook.</h2>
+  <div class="lookbook-grid reveal">
+    <div class="lb lb-tall"><img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=600&q=80" alt="Look 1"></div>
+    <div class="lb"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80" alt="Look 2"></div>
+    <div class="lb"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" alt="Look 3"></div>
+    <div class="lb lb-tall"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80" alt="Look 4"></div>
+    <div class="lb"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=80" alt="Look 5"></div>
+    <div class="lb"><img src="https://images.unsplash.com/photo-1548863227-3af567fc3b27?w=600&q=80" alt="Look 6"></div>
+  </div>
+</section>
+
+<style>
+.lookbook-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 260px 260px;
+  gap: 6px;
+}
+.lb { overflow: hidden; }
+.lb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.lb:hover img { transform: scale(1.06); }
+.lb-tall { grid-row: span 2; }
+.lb:nth-child(1) { grid-column: 1; }
+.lb:nth-child(2) { grid-column: 2; }
+.lb:nth-child(3) { grid-column: 3; }
+.lb:nth-child(4) { grid-column: 4; }
+.lb:nth-child(5) { grid-column: 2; }
+.lb:nth-child(6) { grid-column: 3; }
+</style>
 
 <!-- NEWSLETTER -->
 <section class="newsletter">
